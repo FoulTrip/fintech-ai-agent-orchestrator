@@ -1,0 +1,51 @@
+name: Fintech AI CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Unit & Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Frontend Tests
+        run: |
+          cd frontend
+          npm install
+          npm test
+          
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Backend Tests
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pytest
+
+  deploy:
+    name: Deploy to Google Cloud
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # Configuración de GCP (Placeholder para integración real)
+      - name: Google Auth
+        run: echo "Autenticando con Google Cloud SDK..."
+      - name: Build & Push Images
+        run: |
+          echo "Building Docker images for GCR..."
+          echo "Pushing to gcr.io/fintech-ai-agent-orchestrator/app..."
+      - name: Cloud Run Deploy
+        run: echo "Desplegando en Google Cloud Run..."
