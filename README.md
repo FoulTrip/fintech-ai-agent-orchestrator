@@ -15,9 +15,9 @@ Plataforma SaaS para orquestación de agentes de IA aplicada a análisis de merc
 
 ## URLs
 
-- Frontend: `http://localhost:3000`
-- Backend: `http://localhost:8000`
-- Health backend: `http://localhost:8000/`
+- Frontend: `http://localhost:3002`
+- Backend: `http://localhost:3003`
+- Health backend: `http://localhost:3003/`
 
 ## Estructura relevante
 

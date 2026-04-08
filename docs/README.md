@@ -34,8 +34,8 @@ Plataforma SaaS de alta fidelidad para el sector Fintech que permite la creació
    ```
 
 3. Acceder:
-   - Frontend: `http://localhost:3000`
-   - API: `http://localhost:8000`
+   - Frontend: `http://localhost:3002`
+   - API: `http://localhost:3003`
 
 ---
 Desarrollado por el equipo de Software Factory.

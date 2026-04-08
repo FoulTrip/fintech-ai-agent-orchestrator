@@ -2,7 +2,7 @@
 
 Esta API está construida con FastAPI y proporciona los servicios necesarios para la orquestación de agentes y la simulación de trading.
 
-**Base URL:** `http://localhost:8000/api/v1`
+**Base URL:** `http://localhost:3003/api/v1`
 
 ## Endpoints de Agentes
 
