@@ -1,0 +1,14 @@
+# App Configuration
+NODE_ENV=development
+PORT=3000
+
+# Database
+DATABASE_URL="mongodb+srv://USER:PASSWORD@CLUSTER.mongodb.net/DATABASE?retryWrites=true&w=majority"
+
+# AI Providers (Replace with your keys)
+OPENAI_API_KEY="YOUR_OPENAI_KEY_HERE"
+ANTHROPIC_API_KEY="YOUR_ANTHROPIC_KEY_HERE"
+
+# Backend Config
+BACKEND_URL="http://localhost:8000"
+USE_MOCK_IA=true
