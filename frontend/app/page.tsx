@@ -1,4 +1,4 @@
-import React from 'react';
+import { TradingChart } from '../components/TradingChart';
 
 export default function Dashboard() {
   return (
@@ -28,8 +28,8 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="h-80 bg-slate-900 border border-slate-800 rounded-xl p-6 flex items-center justify-center">
-          <p className="text-slate-600">[ Gráfico de Velas de Mercado ]</p>
+        <div className="h-80 bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <TradingChart />
         </div>
         <div className="h-80 bg-slate-900 border border-slate-800 rounded-xl p-6">
           <h3 className="font-semibold mb-4">Actividad Reciente</h3>

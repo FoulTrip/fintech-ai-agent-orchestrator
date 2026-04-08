@@ -1,6 +1,8 @@
-from fastapi import APIRouter
+from typing import Literal
+
+from fastapi import APIRouter, Query
 from pydantic import BaseModel
-from typing import List, Optional
+
 from services.orchestrator import AgentOrchestrator
 from services.trading_engine import TradingEngine
 
@@ -8,26 +10,35 @@ api_router = APIRouter()
 orchestrator = AgentOrchestrator()
 trading_engine = TradingEngine()
 
+
 class AgentConfig(BaseModel):
     name: str
     instructions: str
     capital: float
     risk_level: str
 
+
 @api_router.post("/agents")
 async def create_agent(config: AgentConfig):
     # Lógica para persistir en DB vía Prisma
-    return {"status": "success", "agent_id": "mock_id_123"}
+    return {"status": "success", "agent_id": "mock_id_123", "agent_name": config.name}
+
 
 @api_router.post("/orchestrator/run")
-async def run_orchestration(symbol: str):
-    report = await orchestrator.run_full_analysis(symbol)
+async def run_orchestration(symbol: str = Query(..., min_length=2, max_length=20)):
+    report = await orchestrator.run_full_analysis(symbol.upper())
     return report
+
 
 @api_router.get("/portfolio/summary")
 async def get_portfolio():
     return trading_engine.get_summary()
 
+
 @api_router.post("/trade/order")
-async def place_order(symbol: str, side: str, amount: float):
-    return trading_engine.execute_order(symbol, side, amount)
+async def place_order(
+    symbol: str = Query(..., min_length=2, max_length=20),
+    side: Literal["BUY", "SELL"] = Query(...),
+    amount: float = Query(..., gt=0),
+):
+    return trading_engine.execute_order(symbol.upper(), side, amount)

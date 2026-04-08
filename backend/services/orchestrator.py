@@ -1,5 +1,6 @@
 from .llm_provider import LLMProvider
 
+
 class AgentOrchestrator:
     def __init__(self):
         self.llm = LLMProvider()
@@ -16,13 +17,22 @@ class AgentOrchestrator:
             f"Analiza {symbol}", "Eres un Analista de Sentimiento experto."
         )
 
-        consolidated = f"REPORTE CONSOLIDADO PARA {symbol}\n\n" \
-                       f"1. {tech_analysis}\n" \
-                       f"2. {fund_analysis}\n" \
-                       f"3. {sent_analysis}"
-        
+        consolidated = (
+            f"REPORTE CONSOLIDADO PARA {symbol}\n\n"
+            f"1. {tech_analysis}\n"
+            f"2. {fund_analysis}\n"
+            f"3. {sent_analysis}"
+        )
+
+        technical_signal = tech_analysis.lower()
+        recommendation = (
+            "BUY"
+            if "sobreventa" in technical_signal or "alcista" in technical_signal
+            else "HOLD"
+        )
+
         return {
             "symbol": symbol,
             "report": consolidated,
-            "recommendation": "BUY" if "sobreventa" in tech_analysis.lower() else "HOLD"
+            "recommendation": recommendation,
         }
