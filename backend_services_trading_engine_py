@@ -1,0 +1,24 @@
+class TradingEngine:
+    def __init__(self):
+        # En una app real, esto vendría de la base de datos
+        self.balance = 100000.0
+        self.positions = []
+
+    def execute_order(self, symbol: str, side: str, amount: float):
+        # Simulación de ejecución de orden
+        price = 45000.0 # Mock price
+        cost = amount * price
+        
+        if side == "BUY" and cost <= self.balance:
+            self.balance -= cost
+            self.positions.append({"symbol": symbol, "amount": amount, "entry": price})
+            return {"status": "filled", "price": price, "remaining_balance": self.balance}
+        
+        return {"status": "rejected", "reason": "Insufficient funds or invalid side"}
+
+    def get_summary(self):
+        return {
+            "total_balance": self.balance,
+            "pnl_daily": 1250.50,
+            "active_positions": len(self.positions)
+        }
